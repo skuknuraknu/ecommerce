@@ -6,3 +6,10 @@
 
 ## Laravel Ecommerce
 
+## Built with
+- TailwindCSS
+- Laravel 10
+- React JS
+- Typescript
+- PostgreSQL
+
