@@ -4,14 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Middleware\VerifyUser;
 
-Route::middleware(['guest'])->group( function () {
-    Route::get('/', HomeController::class)->name('home');
-    Route::get('/login', [AuthController::class, 'index_login'])->name('login.index');
-    Route::post('/login', [AuthController::class, 'post_login'])->name('login.post');
-    Route::get('/register', [AuthController::class, 'index_register'])->name('register.index');
-    Route::post('/register', [AuthController::class, 'post_register'])->name('register.post');
-});
-Route::middleware(['auth'])->group( function () {
+Route::prefix('')
+    ->group(base_path('routes/AuthRoutes.php'));
+
+Route::middleware(['auth', VerifyUser::class])->get('/verify', [AuthController::class, 'index_verify']);
+Route::middleware('auth')->post('/verify', [AuthController::class, 'post_verify']);
+
+Route::middleware(['auth', VerifyUser::class ])->group( function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard.index');
+    Route::post('/logout', [AuthController::class, 'post_logout'])->name('logout.post');
 });
