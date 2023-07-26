@@ -6,10 +6,24 @@
 
 ## Laravel Ecommerce
 
+## Progress
+- [ ] Auth
+    - [X] Middleware for unauthenticated user.
+    - [X] Register
+        - [X] Send Email with token to Registered Email
+        - [X] Handle flash session for register page
+        - [ ] Mail view 
+    - [ ] Login
+- [ ] ...
+
 ## Built with
 - TailwindCSS
 - Laravel 10
 - React JS
 - Typescript
-- PostgreSQL
+- MySQL
 
+<br>
+
+<hr>
+<p align="center"></p>
