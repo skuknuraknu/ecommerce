@@ -1,0 +1,1 @@
+<p> {{ $mail_data['token'] }}</p>
