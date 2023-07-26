@@ -9,6 +9,7 @@
 ## Progress
 - [ ] Auth
     - [X] Middleware for unauthenticated user.
+    - [X] Custom user model 
     - [X] Register
         - [X] Send Email with token to Registered Email
         - [X] Handle flash session for register page
