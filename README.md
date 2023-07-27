@@ -7,15 +7,18 @@
 ## Laravel Ecommerce
 
 ## Progress
-- [ ] Auth
-    - [X] Middleware for unauthenticated user.
+- [X] Auth
+    - [X] Middleware for unauthenticated and not verified user.
     - [X] Custom user model 
     - [X] Register
         - [X] Send Email with token to Registered Email
-        - [X] Handle flash session for register page
-        - [ ] Mail view 
-    - [ ] Login
-- [ ] ...
+        - [X] Mail view 
+    - [X] Login
+        - [X] Check if user is active or not
+    - [X] Verify
+        - [X] Validate user token with expired time
+- [ ] Admin
+    - [ ] Dynamic Menu CRUD
 
 ## Built with
 - TailwindCSS
