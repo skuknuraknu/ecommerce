@@ -17,7 +17,8 @@
         - [X] Check if user is active or not
     - [X] Verify
         - [X] Validate user token with expired time
-- [ ] Admin
+- [ ] Admin & Seller
+    - [X] Dashboard UI with TailwindCSS
     - [ ] Dynamic Menu CRUD
 
 ## Built with
