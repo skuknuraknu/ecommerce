@@ -13,6 +13,6 @@ Route::middleware(['auth', VerifyUser::class])->get('/verify', [AuthController::
 Route::middleware('auth')->post('/verify', [AuthController::class, 'post_verify']);
 
 Route::middleware(['auth', VerifyUser::class ])->group( function () {
-    Route::get('/dashboard', DashboardController::class)->name('dashboard.index');
+    Route::prefix('dashboard')->group(base_path('routes/DashboardRoutes.php'));
     Route::post('/logout', [AuthController::class, 'post_logout'])->name('logout.post');
 });
