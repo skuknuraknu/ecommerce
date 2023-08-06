@@ -19,7 +19,7 @@ export default function Sidebar (): ReactElement {
 					<FaBuffer size={20} className="hover:cursor-pointer"/>
 				</div>
 			</div>
-			<div className="hidden md:block w-64 h-screen bg-slate-700 text-white">
+			<div className="hidden md:block w-64 max-h-full bg-slate-700 text-white">
 				<div className="pl-5 pt-6">
 					<Link href="/dashboard"><h1 className="text-2xl font-bold hover:cursor-pointer">Tokon</h1></Link>
 				</div>

@@ -2,8 +2,10 @@ import React, { KeyboardEvent, MouseEvent, ReactElement, useRef, useState } from
  import { Head } from "@inertiajs/react";
 import Layout from "../../DashboardLayout/Layout";
 import axios from "axios";
+import Modal from "../../Components/Dashboard/Modal";
+import AddData from "./AddData";
 
-const Menu = ({ Menus }): ReactElement => {
+const Menu = ({ Menus, response }): ReactElement => {
 	const [ error, setError ] = useState<string>('')
 	const [ flash, setFlash ] = useState<string>('')
 	const [ data, setData ] = useState<{}>(Menus)
@@ -35,6 +37,7 @@ const Menu = ({ Menus }): ReactElement => {
 		<div>
 			<Head title="E-Commerce | Menu"/>
 			<Layout>
+			<AddData response={ flash }/>
 			<div className="mt-7 p-10 bg-slate-700 text-white shadow-lg rounded w-full">
 				<h1 className="font-semibold text-2xl">Menus Data</h1>
 				{ error && (
@@ -43,7 +46,7 @@ const Menu = ({ Menus }): ReactElement => {
 				{ flash && (
 					<p className="transition duration-400 text-green-600 bg-white px-6 py-2 text-sm font-semibold rounded mt-2">{ flash }</p>
 				)}
-				<table className="w-full text-sm text-left text-gray-500 mt-5">
+				<table id="table" className="w-full text-sm text-left text-gray-500 mt-3">
 		        <thead className="text-xs text-gray-700 uppercase bg-gray-50">
 					<tr>
 		                <th className="px-6 py-3">No.</th>
@@ -57,19 +60,28 @@ const Menu = ({ Menus }): ReactElement => {
 		        <tbody>
 		        	{ Menus.map(( item: any, index: number) => {
 		        		return (
-		        			<tr className="bg-white border-b bg-slate-600 text-white" key={index}>
+		        			<tr className="bg-white border-b bg-slate-600" key={index}>
 				                <td suppressContentEditableWarning={true} defaultValue={''} contentEditable="true" className="px-6 py-4 font-medium">{ index+1 }</td>
 				                <td suppressContentEditableWarning={true} defaultValue={''} contentEditable="true" className="px-6 py-4 font-medium">{ item.menu_name}</td>
 				                <td suppressContentEditableWarning={true} defaultValue={''} contentEditable="true" className="px-6 py-4 font-medium">{ item.route_name}</td>
 				                <td className="px-6 py-4 font-medium text-white">
+				                { item.is_nested == "YES" ? (
 				                	<select className="bg-slate-700 px-3 py-1 rounded" required>
 				                		<option value="">--STATUS--</option>
-				                		{ item.is_nested == "YES" ? <option value="YES" selected>YES</option> : <option value="NO" selected>NO</option> }
+				                		<option value="YES" selected>YES</option>
+				                		<option value="NO">NO</option>
 				                	</select>
+				                	) : (
+				                		<select className="bg-slate-700 px-3 py-1 rounded" required>
+					                		<option value="">--STATUS--</option>
+					                		<option value="YES">YES</option>
+					                		<option value="NO" selected>NO</option>
+				                		</select>
+				                	) }
 				                </td>
 				                <td suppressContentEditableWarning={true} defaultValue={''} contentEditable="true" className="px-6 py-4 font-medium">{ item.parent_name }</td>
 				                <td className="px-6 py-4 font-medium">
-				                	<div className="block">
+				                	<div className="block text-white">
 				                		<input type="text" value={item.id} hidden/>
 				                		<button className="mr-1 bg-sky-500 px-6 py-2 rounded border border-white hover:bg-sky-700 transition duration-300" onClick={SaveData}>Save</button>
 				                		<button className="bg-red-500 px-6 py-2 rounded border border-white hover:bg-red-700 transition duration-300">Delete</button>

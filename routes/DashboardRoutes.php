@@ -13,5 +13,6 @@ Route::post('/role/delete', [Role::class, 'destroy_role'])->name('role.destroy')
 
 Route::get('/menu', [Menu::class, 'index'])->name('menu.get');
 Route::post('/menu', [Menu::class, 'store'])->name('menu.post');
+Route::post('/menuForm', [Menu::class, 'storeForm'])->name('menu.postForm');
 Route::post('/menu/delete', [Menu::class, 'destroy'])->name('menu.destroy');
  ?>

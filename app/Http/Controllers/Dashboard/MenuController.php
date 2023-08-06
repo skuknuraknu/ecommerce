@@ -13,6 +13,16 @@ class MenuController extends Controller {
         $Menus = Menu::select("id","menu_name", "route_name", "is_nested", "parent_name")->get();
         return Inertia::render("Dashboard/Menu/Index", compact('Menus'));
     }
+    // store form data 
+    public function storeForm( Request $r ) {
+        $r->validate(["menu_name" => "required|max:255|unique:tb_menu", "route_name" => "required|max:255", "is_nested" => "required|max:5", "parent_name" => "required|max:255"]);
+        try { 
+            Menu::create(["menu_name" => $r->menu_name, "route_name" => $r->route_name, "is_nested" => $r->is_nested, "parent_name" => $r->parent_name]);
+            return response()->json(["success" => true, "message" => "Data successfully created" ], 200);
+        } catch ( Exception $e ) {
+            return response()->json(["success" => false, "message" => "Data failed created" ], 400);
+        }
+    }
     public function store(Request $r){
         $r->validate(["menuName" => "required|max:255", "routeName" => "required|max:255", "isNested" => "required|max:5", "parentName" => "required|max:255"]);
         try { 
