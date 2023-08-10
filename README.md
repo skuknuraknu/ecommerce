@@ -19,7 +19,8 @@
         - [X] Validate user token with expired time
 - [ ] Admin & Seller
     - [X] Dashboard UI with TailwindCSS
-    - [ ] Dynamic Menu CRUD
+    - [X] Dynamic Menu CRUD
+        - [ ] Dropdown menu support
 
 ## Built with
 - TailwindCSS
