@@ -14,7 +14,7 @@ export default function AddData ({ response }): ReactElement {
 			setMsg(res.data.message)
 			setTimeout( () => {
 				setMsg('')
-			}, 5000)
+			}, 3000)
 		}).catch( err => {
 			setError(err.response.data.message)
 			setTimeout( () => {

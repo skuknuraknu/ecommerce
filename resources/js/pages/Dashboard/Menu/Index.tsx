@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, MouseEvent, ReactElement, useRef, useState } from "react";
+import React, { KeyboardEvent, MouseEvent, ReactElement, useEffect, useRef, useState } from "react";
  import { Head } from "@inertiajs/react";
 import Layout from "../../DashboardLayout/Layout";
 import axios from "axios";
@@ -8,7 +8,7 @@ import AddData from "./AddData";
 const Menu = ({ Menus, response }): ReactElement => {
 	const [ error, setError ] = useState<string>('')
 	const [ flash, setFlash ] = useState<string>('')
-	const [ data, setData ] = useState<{}>(Menus)
+	const [ data, setData ] = useState<[]>(Menus)
 
 	const SaveData = (event: MouseEvent<HTMLButtonElement>) => {
 		const target = (event.target as HTMLElement).closest('tbody > tr')
@@ -32,6 +32,17 @@ const Menu = ({ Menus, response }): ReactElement => {
 						setError(JSON.parse(err.request.response).message)
 					}
 				})
+	}
+
+	const DeleteData = ( event: MouseEvent<HTMLButtonElement>): void => {
+		const id = ( ( event.target as HTMLElement ).closest('div')?.firstChild as HTMLInputElement ).value
+		axios.post('menu/delete', { id })
+			.then( res => {
+				setData(res.data.data)
+			})
+			.catch( error => {
+				console.log( error )
+			})
 	}
 	return (
 		<div>
@@ -58,7 +69,7 @@ const Menu = ({ Menus, response }): ReactElement => {
 		            </tr>
 		        </thead>
 		        <tbody>
-		        	{ Menus.map(( item: any, index: number) => {
+		        	{ data.map(( item: any, index: number) => {
 		        		return (
 		        			<tr className="bg-white border-b bg-slate-600" key={index}>
 				                <td suppressContentEditableWarning={true} defaultValue={''} contentEditable="true" className="px-6 py-4 font-medium">{ index+1 }</td>
@@ -84,7 +95,7 @@ const Menu = ({ Menus, response }): ReactElement => {
 				                	<div className="block text-white">
 				                		<input type="text" value={item.id} hidden/>
 				                		<button className="mr-1 bg-sky-500 px-6 py-2 rounded border border-white hover:bg-sky-700 transition duration-300" onClick={SaveData}>Save</button>
-				                		<button className="bg-red-500 px-6 py-2 rounded border border-white hover:bg-red-700 transition duration-300">Delete</button>
+				                		<button onClick={ DeleteData } className="bg-red-500 px-6 py-2 rounded border border-white hover:bg-red-700 transition duration-300">Delete</button>
 				                	</div>
 				                </td>
 				        	</tr>

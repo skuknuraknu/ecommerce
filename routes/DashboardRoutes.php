@@ -11,7 +11,8 @@ Route::get('/role', [Role::class, 'get_role'])->name('role.get');
 Route::post('/role', [Role::class, 'post_role'])->name('role.post');
 Route::post('/role/delete', [Role::class, 'destroy_role'])->name('role.destroy');
 
-Route::get('/menu', [Menu::class, 'index'])->name('menu.get');
+Route::get('/menu', [Menu::class, 'index']);
+Route::get('/menu/get', [Menu::class, 'getMenu']);
 Route::post('/menu', [Menu::class, 'store'])->name('menu.post');
 Route::post('/menuForm', [Menu::class, 'storeForm'])->name('menu.postForm');
 Route::post('/menu/delete', [Menu::class, 'destroy'])->name('menu.destroy');

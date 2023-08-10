@@ -13,6 +13,9 @@ class MenuController extends Controller {
         $Menus = Menu::select("id","menu_name", "route_name", "is_nested", "parent_name")->get();
         return Inertia::render("Dashboard/Menu/Index", compact('Menus'));
     }
+    public function getMenu(){
+        return response()->json(["success" => true, "data" => Menu::all()->toArray()], 200);
+    }
     // store form data 
     public function storeForm( Request $r ) {
         $r->validate(["menu_name" => "required|max:255|unique:tb_menu", "route_name" => "required|max:255", "is_nested" => "required|max:5", "parent_name" => "required|max:255"]);
@@ -31,5 +34,10 @@ class MenuController extends Controller {
         } catch ( Exception $e ) {
             return response()->json(["success" => false, "error" => $e->getMessage()]);
         }
+    }
+    public function destroy(){
+        $id = request()->id;
+        Menu::where(["id" => $id])->delete();
+        return response()->json(["success" => true, "flash" => "Data deleted successfully", "data" => Menu::all()->toArray()]);
     }
 }
